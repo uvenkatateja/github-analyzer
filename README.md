@@ -79,11 +79,53 @@ curl -X POST http://localhost:3000/api/v1/profiles/analyze \
 
 ## Features
 
-- Fetches GitHub profile + repositories
-- Calculates: most used language, avg stars, account age, activity score
-- MySQL storage with auto table creation
-- Caching (10 min), rate limiting, validation
-- Postman collection included
+### Core Features (Required)
+- **GitHub Profile Analysis** - Fetch public profile data using GitHub API
+- **Repository Analysis** - Fetch and analyze all user repositories
+- **MySQL Storage** - Store analyzed profiles with timestamps
+- **List All Profiles** - Paginated endpoint to fetch all stored profiles
+- **Single Profile Lookup** - Get specific profile by username
+- **RESTful API** - Clean, versioned endpoints under `/api/v1`
+
+### Advanced Insights (Bonus)
+- **Most Used Language** - Analyzes all repos to find primary language
+- **Average Stars** - Calculates mean stars across repositories
+- **Account Age** - Days since GitHub account creation
+- **Activity Score** - Custom formula: `(followers × 2) + (repos × 3) + gists`
+- **Profile Metadata** - Bio, blog, company, location, hireable status
+
+### Additional Endpoints (Bonus)
+- **Refresh Profile** - Re-fetch and update existing profile data
+- **Delete Profile** - Remove profile from database
+- **Health Check** - Monitor API and database status
+
+### Performance & Optimization
+- **Caching** - 10-minute cache for GitHub API responses (node-cache)
+- **Rate Limiting** - Global (100/15min) + Analyze endpoint (10/min)
+- **Upsert Logic** - Updates existing profiles instead of duplicating
+- **Pagination** - Max 50 items per page with metadata
+
+### Security & Validation
+- **Helmet** - Security headers
+- **CORS** - Configurable cross-origin requests
+- **Input Validation** - express-validator with field-level errors
+- **SQL Injection Prevention** - Parameterized queries
+- **Compression** - Response compression for production
+
+### Developer Experience
+- **Swagger UI** - Interactive API documentation
+- **Request Logging** - Morgan in combined format
+- **Centralized Error Handling** - Proper HTTP status codes
+- **Auto Database Setup** - Creates tables on startup
+- **GitHub Token Support** - Optional token for 5000 req/hr (vs 60)
+- **Postman Collection** - Ready-to-import API tests
+
+### Production Ready
+- **Deployed on Render** - Live API with auto-deploy from GitHub
+- **Cloud Database** - Aiven MySQL with SSL
+- **Connection Pooling** - Efficient database connections
+- **Timestamps** - `analyzed_at` and `updated_at` tracking
+- **Environment Aware** - Different configs for dev/production
 
 ## Live Deployment
 
