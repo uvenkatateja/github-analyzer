@@ -4,7 +4,15 @@ REST API that fetches GitHub profiles, calculates insights, and stores them in M
 
 ## Tech Stack
 
-Node.js + Express.js + MySQL + axios + Swagger UI
+- **Backend**: Node.js + Express.js
+- **Database**: MySQL (Aiven Cloud)
+- **Deployment**: Render
+- **HTTP Client**: axios (for GitHub API)
+- **Documentation**: Swagger UI
+- **Security**: helmet, cors, compression
+- **Validation**: express-validator
+- **Rate Limiting**: express-rate-limit
+- **Caching**: node-cache
 
 ## Quick Setup
 
@@ -32,12 +40,20 @@ Server runs at `http://localhost:3000`
 ## Environment Variables (.env)
 
 ```env
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=yourpassword
-DB_NAME=github_analyzer
+PORT=3000
+NODE_ENV=development
+DB_HOST=your-aiven-host.aivencloud.com
+DB_PORT=22430
+DB_USER=avnadmin
+DB_PASSWORD=your-aiven-password
+DB_NAME=defaultdb
+DB_SSL=true
 GITHUB_TOKEN=ghp_yourtoken  # Optional: increases rate limit to 5000/hr
+CORS_ORIGIN=*
 ```
+
+**Database**: Using Aiven MySQL (free tier)
+**Deployment**: Render (free tier)
 
 ## API Endpoints
 
@@ -69,9 +85,17 @@ curl -X POST http://localhost:3000/api/v1/profiles/analyze \
 - Caching (10 min), rate limiting, validation
 - Postman collection included
 
-## Deployment
+## Live Deployment
 
-See `DEPLOYMENT.md` for Render deployment guide.
+**Live API URL**: https://github-analyzer-1vki.onrender.com
+
+**Swagger UI**: https://github-analyzer-1vki.onrender.com/api-docs
+
+**Database**: Aiven MySQL (Cloud-hosted)
+
+**Hosting**: Render (Free tier)
+
+See `DEPLOYMENT.md` for detailed deployment guide.
 
 ## Files
 
